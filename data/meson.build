@@ -43,4 +43,21 @@ configure_file(
   install_dir: get_option('datadir') / 'dbus-1' / 'services'
 )
 
+font_files = files(
+	'fonts/iosevka.ttf',
+	'fonts/kalam.ttf',
+	'fonts/museomoderno.ttf',
+	'fonts/noto-serif.ttf'
+)
+
+install_data(
+  font_files,
+  install_dir: join_paths(
+    get_option('prefix'),
+    'share',
+    'fonts',
+    'io.github.sitraorg.sitra'
+  )
+)
+
 subdir('icons')

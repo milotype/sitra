@@ -85,6 +85,15 @@ public class Sitra.Window : Adw.ApplicationWindow {
         integration_dialog = new Sitra.IntegrationDialog ();
         network_helper = Sitra.Helpers.NetworkHelper.get_instance ();
 
+        // actions
+        var searchAction = new SimpleAction("search", null);
+        searchAction.activate.connect(() => {
+            search_bar.search_mode_enabled = !search_bar.search_mode_enabled;
+        });
+
+        this.add_action(searchAction);
+
+       // house keeping
         banner.set_revealed (false);
 
         // --- Load Preview Texts ---
@@ -402,6 +411,24 @@ public class Sitra.Window : Adw.ApplicationWindow {
         return label;
     }
 
+    private bool is_any_default_text (string text) {
+        if (text == preview_manager.DEFAULT_PREVIEW_TEXT || text == preview_manager.DEFAULT_ICON_PREVIEW) {
+            return true;
+        }
+
+        try {
+            foreach (var key in preview_texts.get_keys ("preview_text")) {
+                if (text == preview_texts.get_string ("preview_text", key)) {
+                    return true;
+                }
+            }
+        } catch (Error e) {
+            // ignore
+        }
+
+        return false;
+    }
+
     private void update_italic_toggle_state (Libsitra.Font font) {
         bool has_italic = font.styles.contains ("italic");
         italic_toggle.set_sensitive (has_italic);
@@ -485,7 +512,7 @@ public class Sitra.Window : Adw.ApplicationWindow {
                 if (button.active) {
                     try {
                         string text = preview_texts.get_string ("preview_text", subset);
-                        if (preview_entry.get_text () != text) {
+                        if (preview_entry.get_text () != text && is_any_default_text (preview_entry.get_text ())) {
                             preview_entry.set_text (text);
                         }
                     } catch (Error e) {

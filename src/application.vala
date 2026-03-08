@@ -34,6 +34,7 @@ public class Sitra.Application : Adw.Application {
         };
         this.add_action_entries (action_entries, this);
         this.set_accels_for_action ("app.quit", {"<primary>q"});
+        this.set_accels_for_action ("win.search", {"<primary>f"});
     }
 
     public override void activate () {
