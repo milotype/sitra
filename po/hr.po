@@ -109,15 +109,15 @@ msgstr "Milo Ivir <mail@milotype.de>, 2026"
 
 #: src/application.vala:66
 msgid "Concessio"
-msgstr "Dozvola"
+msgstr "Concessio"
 
 #: src/application.vala:66
 msgid "Understand file permissions"
-msgstr "Razumijevanje dozvola za datoteke"
+msgstr "Razumij dozvole za datoteke"
 
 #: src/application.vala:67
 msgid "Embellish"
-msgstr "Uljepšaj"
+msgstr "Embellish"
 
 #: src/application.vala:67
 msgid "Install Nerd Fonts"
